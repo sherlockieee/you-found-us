@@ -790,6 +790,98 @@
         justify-content: center;
       }
 
+      /* ---------- be our hero · gilt portrait ---------- */
+      .hero-portrait {
+        text-align: center;
+      }
+      .gilt-frame {
+        width: min(360px, 82vw);
+        margin: 0 auto;
+        padding: 18px;
+        background: linear-gradient(
+          135deg,
+          #7c5a1f,
+          #d8b04a 20%,
+          #a6802e 45%,
+          #e2c271 62%,
+          #8a6423 85%,
+          #6b4e1b
+        );
+        box-shadow:
+          0 14px 30px rgba(36, 28, 18, 0.35),
+          inset 0 2px 3px rgba(255, 236, 190, 0.55),
+          inset 0 -2px 3px rgba(60, 42, 12, 0.6);
+        transform: rotate(-1.2deg);
+      }
+      .gilt-lip {
+        padding: 7px;
+        background: linear-gradient(
+          315deg,
+          #7c5a1f,
+          #c79e3f 30%,
+          #8a6423 60%,
+          #ddba5c
+        );
+        box-shadow: inset 0 0 0 1px rgba(60, 42, 12, 0.5);
+      }
+      .portrait {
+        aspect-ratio: 4 / 5;
+        background:
+          radial-gradient(
+            ellipse 70% 60% at 50% 42%,
+            rgba(244, 234, 204, 0.25),
+            transparent 75%
+          ),
+          linear-gradient(rgba(36, 28, 18, 0.14), rgba(36, 28, 18, 0.3)),
+          var(--parchment);
+        box-shadow: inset 0 0 42px rgba(36, 28, 18, 0.5);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 20px;
+      }
+      .portrait-q {
+        font-family: "Rye", serif;
+        font-size: clamp(5rem, 18vw, 7rem);
+        line-height: 1;
+        color: rgba(36, 28, 18, 0.22);
+        text-shadow: 1px 1px 0 rgba(244, 234, 204, 0.35);
+      }
+      .portrait-caption {
+        font-family: "IM Fell English", serif;
+        font-style: italic;
+        font-size: 1.15rem;
+        color: var(--ink-2);
+      }
+      .nameplate {
+        font-family: "Special Elite", monospace;
+        display: inline-block;
+        margin-top: 24px;
+        padding: 7px 22px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        font-size: 0.72rem;
+        color: #3e2e10;
+        background: linear-gradient(180deg, #ddba5c, #a6802e);
+        border: 1px solid #7c5a1f;
+        border-radius: 3px;
+        box-shadow:
+          inset 0 1px 0 rgba(255, 240, 200, 0.6),
+          0 2px 4px rgba(36, 28, 18, 0.3);
+        text-shadow: 0 1px 0 rgba(255, 240, 200, 0.35);
+      }
+      .portrait-note {
+        margin: 18px auto 0;
+        max-width: 44ch;
+        font-style: italic;
+      }
+      .hero-portrait .btn-row {
+        margin-top: 26px;
+        justify-content: center;
+      }
+
       footer {
         text-align: center;
         padding: 52px 22px 64px;
@@ -1068,6 +1160,36 @@
               >
             </div>
           </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 7 · BE OUR HERO -->
+    <div class="wrap">
+      <section aria-labelledby="hero-portrait-h" class="hero-portrait">
+        <div class="sec-head">
+          <span class="stamp" aria-hidden="true">№ 6</span>
+          <h2 id="hero-portrait-h">Be Our Hero</h2>
+        </div>
+        <div class="gilt-frame">
+          <div class="gilt-lip">
+            <div class="portrait">
+              <span class="portrait-q" aria-hidden="true">?</span>
+              <p class="portrait-caption">This could be you.</p>
+            </div>
+          </div>
+        </div>
+        <div><span class="nameplate">Our Hero · Est. 2026</span></div>
+        <p class="portrait-note">
+          One landlord's portrait will hang here forever. We will polish the
+          frame.
+        </p>
+        <div class="btn-row">
+          <a
+            class="btn primary"
+            href="mailto:ha@cruxclimate.com?subject=I%20have%20an%20apartment%20for%20you"
+            >Claim the frame</a
+          >
         </div>
       </section>
     </div>
