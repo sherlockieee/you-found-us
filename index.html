@@ -790,6 +790,31 @@
         justify-content: center;
       }
 
+      .mail-fallback {
+        margin-top: 16px;
+        font-family: "Special Elite", monospace;
+        font-size: 0.76rem;
+        letter-spacing: 0.06em;
+        color: var(--ink-2);
+        text-align: center;
+      }
+      .copy-email {
+        font: inherit;
+        color: var(--rust);
+        background: none;
+        border: none;
+        border-bottom: 1px dashed var(--rust);
+        cursor: pointer;
+        padding: 0 2px;
+      }
+      .copy-email:hover {
+        background: rgba(94, 42, 30, 0.08);
+      }
+      .copy-email:focus-visible {
+        outline: 2px dashed var(--rust);
+        outline-offset: 3px;
+      }
+
       /* ---------- be our hero · gilt portrait ---------- */
       .hero-portrait {
         text-align: center;
@@ -1103,6 +1128,12 @@
                   >I know a place</a
                 >
               </div>
+              <p class="mail-fallback">
+                buttons shy? tap to copy:
+                <button class="copy-email" type="button">
+                  phuonghatrannguyen00@gmail.com
+                </button>
+              </p>
             </div>
           </div>
         </section>
@@ -1155,10 +1186,16 @@
             <div class="btn-row">
               <a
                 class="btn primary"
-                href="mailto:ha@cruxclimate.com?subject=Apartment%20lead%20for%20Ha%20%26%20Chris"
+                href="mailto:phuonghatrannguyen00@gmail.com?subject=Apartment%20lead%20for%20Ha%20%26%20Chris"
                 >Send us a lead</a
               >
             </div>
+            <p class="mail-fallback">
+              buttons shy? tap to copy:
+              <button class="copy-email" type="button">
+                phuonghatrannguyen00@gmail.com
+              </button>
+            </p>
           </div>
         </div>
       </section>
@@ -1187,10 +1224,16 @@
         <div class="btn-row">
           <a
             class="btn primary"
-            href="mailto:ha@cruxclimate.com?subject=I%20have%20an%20apartment%20for%20you"
+            href="mailto:phuonghatrannguyen00@gmail.com?subject=I%20have%20an%20apartment%20for%20you"
             >Claim the frame</a
           >
         </div>
+        <p class="mail-fallback">
+          buttons shy? tap to copy:
+          <button class="copy-email" type="button">
+            phuonghatrannguyen00@gmail.com
+          </button>
+        </p>
       </section>
     </div>
 
@@ -1208,6 +1251,25 @@
         Math.floor((Date.now() - SEARCH_START) / 86400000)
       );
       document.getElementById("days-count").textContent = days;
+
+      document.querySelectorAll(".copy-email").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const email = btn.textContent.trim();
+          try {
+            await navigator.clipboard.writeText(email);
+          } catch {
+            const ta = document.createElement("textarea");
+            ta.value = email;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            ta.remove();
+          }
+          const original = btn.textContent;
+          btn.textContent = "copied — thank you kindly ✓";
+          setTimeout(() => (btn.textContent = original), 2000);
+        });
+      });
       document.getElementById("dogs-count").textContent = Math.floor(
         days * 2.5
       );
