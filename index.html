@@ -798,8 +798,10 @@
         color: var(--ink-2);
         text-align: center;
       }
-      .copy-email {
+      .copy-email,
+      .text-link {
         font: inherit;
+        text-decoration: none;
         color: var(--rust);
         background: none;
         border: none;
@@ -807,10 +809,12 @@
         cursor: pointer;
         padding: 0 2px;
       }
-      .copy-email:hover {
+      .copy-email:hover,
+      .text-link:hover {
         background: rgba(94, 42, 30, 0.08);
       }
-      .copy-email:focus-visible {
+      .copy-email:focus-visible,
+      .text-link:focus-visible {
         outline: 2px dashed var(--rust);
         outline-offset: 3px;
       }
@@ -1129,10 +1133,10 @@
                 >
               </div>
               <p class="mail-fallback">
-                buttons shy? tap to copy:
-                <button class="copy-email" type="button">
-                  phuonghatrannguyen00@gmail.com
-                </button>
+                or text:
+                <a class="text-link" href="sms:+16282929760"
+                  >+1 (628) 292-9760</a
+                >
               </p>
             </div>
           </div>
@@ -1191,11 +1195,11 @@
               >
             </div>
             <p class="mail-fallback">
-              buttons shy? tap to copy:
-              <button class="copy-email" type="button">
-                phuonghatrannguyen00@gmail.com
-              </button>
-            </p>
+                or text:
+                <a class="text-link" href="sms:+16282929760"
+                  >+1 (628) 292-9760</a
+                >
+              </p>
           </div>
         </div>
       </section>
@@ -1229,11 +1233,11 @@
           >
         </div>
         <p class="mail-fallback">
-          buttons shy? tap to copy:
-          <button class="copy-email" type="button">
-            phuonghatrannguyen00@gmail.com
-          </button>
-        </p>
+                or text:
+                <a class="text-link" href="sms:+16282929760"
+                  >+1 (628) 292-9760</a
+                >
+              </p>
       </section>
     </div>
 
