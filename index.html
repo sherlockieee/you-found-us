@@ -3,22 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>YOU FOUND US — Two Nice Tenants, Duboce Triangle</title>
+    <title>YOU FOUND US — the pole, Duboce Triangle</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Rye&family=Alfa+Slab+One&family=IM+Fell+English:ital@0;1&family=Special+Elite&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Rye&family=Alfa+Slab+One&family=IM+Fell+English:ital@0;1&family=Special+Elite&family=Caveat:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
+        --fog-hi: #b3bcc0;
+        --fog-lo: #878f95;
+        --wood-edge: #241d16;
+        --wood-mid: #55462f;
+        --wood-hi: #6b593f;
+        --wood-carve: #ecdcb4;
         --parchment: #e7d7ae;
-        --parchment-light: #f4eacc;
-        --edge: #c8af7e;
+        --parchment-lt: #f4eacc;
+        --paper-white: #f7f2e3;
         --ink: #241c12;
         --ink-2: #3e3122;
         --rust: #5e2a1e;
         --stain: #8a6b44;
+        --sticky: #f0da69;
+        --manila: #ecdfb2;
+        --news: #ded6c0;
+        --steel: #9aa0a3;
       }
       * {
         margin: 0;
@@ -26,841 +36,874 @@
         box-sizing: border-box;
       }
       html {
-        scroll-behavior: smooth;
         overflow-x: clip;
       }
       body {
-        background:
-          radial-gradient(
-            ellipse 55% 38% at 18% 12%,
-            rgba(138, 107, 68, 0.08),
-            transparent 70%
-          ),
-          radial-gradient(
-            ellipse 48% 34% at 86% 58%,
-            rgba(138, 107, 68, 0.07),
-            transparent 70%
-          ),
-          radial-gradient(
-            ellipse 42% 30% at 38% 92%,
-            rgba(138, 107, 68, 0.06),
-            transparent 70%
-          ),
-          radial-gradient(
-            ellipse 30% 22% at 70% 8%,
-            rgba(138, 107, 68, 0.05),
-            transparent 70%
-          ),
-          var(--parchment);
+        background: linear-gradient(180deg, var(--fog-hi), var(--fog-lo) 60%, #7c848a);
         color: var(--ink);
         font-family: "IM Fell English", Georgia, serif;
-        line-height: 1.65;
-        overflow-x: hidden;
+        line-height: 1.55;
+        overflow-x: clip;
+        min-height: 100vh;
       }
-      /* paper grain */
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        z-index: 40;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
-        opacity: 0.16;
-        mix-blend-mode: multiply;
-      }
-      /* browned-edge vignette */
+      /* street fog grain over everything */
       body::after {
         content: "";
         position: fixed;
         inset: 0;
         pointer-events: none;
-        z-index: 39;
-        background: radial-gradient(
-          ellipse 115% 115% at 50% 42%,
-          transparent 58%,
-          rgba(138, 107, 68, 0.12) 78%,
-          rgba(94, 66, 36, 0.28) 96%,
-          rgba(70, 48, 26, 0.4) 100%
-        );
-      }
-      .wrap {
-        max-width: 840px;
-        margin: 0 auto;
-        padding: 0 22px;
-        position: relative;
+        z-index: 60;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+        opacity: 0.13;
+        mix-blend-mode: multiply;
       }
       ::selection {
         background: var(--ink);
         color: var(--parchment);
       }
-
-      /* ---------- shared ephemera ---------- */
-      .stamp {
-        font-family: "Special Elite", monospace;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 62px;
-        height: 62px;
-        border-radius: 50%;
-        border: 2px solid var(--rust);
-        box-shadow:
-          inset 0 0 0 4px transparent,
-          inset 0 0 0 5px rgba(94, 42, 30, 0.35);
-        color: var(--rust);
-        font-size: 1rem;
-        letter-spacing: 0.05em;
-        transform: rotate(-8deg);
-        opacity: 0.85;
-      }
-      .rule {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        justify-content: center;
-        color: var(--ink-2);
-        opacity: 0.6;
-        margin: 0 auto;
-        max-width: 340px;
-      }
-      .rule::before,
-      .rule::after {
-        content: "";
+      .sr-only {
+        position: absolute;
+        width: 1px;
         height: 1px;
-        flex: 1;
-        background: currentColor;
-        box-shadow: 0 3px 0 currentColor;
-      }
-      .rule span {
-        font-size: 1rem;
-        line-height: 1;
-      }
-      .star-row {
-        text-align: center;
-        color: var(--ink-2);
-        font-size: clamp(0.85rem, 2.4vw, 1.1rem);
-        letter-spacing: 0.5em;
-        text-indent: 0.5em;
-        opacity: 0.85;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
         white-space: nowrap;
+        border: 0;
       }
 
-      h2 {
-        font-family: "Rye", serif;
-        font-weight: 400;
-        font-size: clamp(1.8rem, 5.5vw, 2.7rem);
-        line-height: 1.12;
-        letter-spacing: 0.01em;
-        color: var(--ink);
-        text-shadow: 0.5px 0.5px 0 rgba(62, 49, 34, 0.3);
-      }
-      .sec-head {
-        text-align: center;
-        margin-bottom: 40px;
-      }
-      .sec-head .stamp {
-        margin-bottom: 18px;
-      }
-      .sec-head h2 {
-        margin-bottom: 14px;
-      }
-
-      /* ---------- HERO ---------- */
-      .hero {
-        padding: 56px 0 52px;
-        text-align: center;
-      }
-      .hero-frame {
-        border: 3px solid var(--ink);
-        background:
-          radial-gradient(
-            ellipse 60% 45% at 78% 18%,
-            rgba(138, 107, 68, 0.09),
-            transparent 70%
-          ),
-          radial-gradient(
-            ellipse 50% 40% at 12% 80%,
-            rgba(138, 107, 68, 0.07),
-            transparent 70%
-          ),
-          radial-gradient(
-            ellipse 120% 120% at 50% 50%,
-            transparent 62%,
-            rgba(138, 107, 68, 0.14) 100%
-          ),
-          var(--parchment-light);
-        padding: 64px 26px 56px;
+      /* ============ THE POLE ============ */
+      .pole {
         position: relative;
+        width: min(740px, 100%);
+        margin: 0 auto 0 max(0px, calc(50% - 396px)); /* a hair off-center, like you walked up to it */
+        min-height: 100vh;
+        padding: 34px 0 90px;
+        background:
+          /* wood grain streaks (vertical, anisotropic turbulence) */
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='600'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.13' numOctaves='4' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.55 0.35 0 0 0'/%3E%3C/filter%3E%3Crect width='300' height='600' filter='url(%23g)'/%3E%3C/svg%3E"),
+          /* long weather cracks */
+          repeating-linear-gradient(
+            90deg,
+            transparent 0 97px,
+            rgba(18, 12, 6, 0.22) 97px 98.5px,
+            transparent 98.5px 151px,
+            rgba(18, 12, 6, 0.11) 151px 152px,
+            transparent 152px 233px
+          ),
+          /* round-timber shading */
+          linear-gradient(
+            90deg,
+            #2b2218,
+            #52422d 7%,
+            #6b573c 22%,
+            #7d684b 50%,
+            #6b573c 78%,
+            #4d3f2a 93%,
+            #292016
+          );
+        background-size: 300px 600px, auto, auto;
         box-shadow:
-          0 1px 2px rgba(36, 28, 18, 0.25),
-          0 10px 30px rgba(94, 66, 36, 0.3),
-          2px 3px 0 rgba(36, 28, 18, 0.12),
-          -1px 2px 0 rgba(36, 28, 18, 0.08);
+          14px 0 34px rgba(20, 18, 16, 0.45),
+          -10px 0 26px rgba(20, 18, 16, 0.35);
       }
-      .hero-frame::before {
+      /* creosote drip along one side */
+      .pole::before {
         content: "";
         position: absolute;
-        inset: 7px;
-        border: 1px solid var(--ink-2);
-        opacity: 0.8;
+        inset: 0 auto 0 9%;
+        width: 30px;
+        background: linear-gradient(180deg, rgba(14, 9, 4, 0.35), rgba(14, 9, 4, 0) 26%, rgba(14, 9, 4, 0.22) 61%, rgba(14, 9, 4, 0) 88%);
+        filter: blur(3px);
         pointer-events: none;
       }
-      .corner-b::before,
-      .corner-b::after,
-      .corner-t::before,
-      .corner-t::after {
-        content: "✦";
-        font-size: 0.95rem;
-        color: var(--rust);
+
+      /* old staple scars scattered up the pole */
+      .scar {
+        position: absolute;
+        width: 15px;
+        height: 5px;
+        border: 1.5px solid #86837c;
+        border-bottom: none;
+        border-radius: 2px 2px 0 0;
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
         opacity: 0.8;
+      }
+      .scar.rusted {
+        border-color: #6d4a33;
+      }
+      .scar-drip {
         position: absolute;
+        width: 3px;
+        height: 26px;
+        background: linear-gradient(180deg, rgba(109, 74, 51, 0.55), transparent);
+        border-radius: 2px;
       }
-      .corner-t::before {
-        top: 16px;
-        left: 20px;
+
+      /* ============ HARDWARE ============ */
+      .staple {
+        position: absolute;
+        width: 26px;
+        height: 8px;
+        border: 2.5px solid var(--steel);
+        border-bottom: none;
+        border-radius: 3px 3px 0 0;
+        box-shadow:
+          0 1px 1px rgba(0, 0, 0, 0.55),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        z-index: 4;
       }
-      .corner-t::after {
-        top: 16px;
-        right: 20px;
+      .tack {
+        position: absolute;
+        width: 17px;
+        height: 17px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 34% 30%, #d8927e, #8a4433 48%, #4c1f14 92%);
+        box-shadow:
+          0 2px 3px rgba(0, 0, 0, 0.5),
+          inset 0 -1px 2px rgba(0, 0, 0, 0.35);
+        z-index: 4;
       }
-      .corner-b::before {
-        bottom: 14px;
-        left: 20px;
+      .tape {
+        position: absolute;
+        width: 92px;
+        height: 27px;
+        background: rgba(246, 240, 218, 0.55);
+        border-left: 1px dashed rgba(120, 104, 70, 0.35);
+        border-right: 1px dashed rgba(120, 104, 70, 0.35);
+        box-shadow: 0 1px 3px rgba(30, 22, 12, 0.25);
+        backdrop-filter: blur(0.5px);
+        z-index: 4;
       }
-      .corner-b::after {
-        bottom: 14px;
-        right: 20px;
+
+      /* ============ ARTIFACT BASE ============ */
+      .art {
+        position: relative;
+        box-shadow:
+          0 2px 4px rgba(15, 10, 5, 0.35),
+          0 14px 28px rgba(15, 10, 5, 0.38);
       }
-      .eyebrow {
+
+      /* faded relics peeking from underneath */
+      .relic {
+        position: absolute;
+        background: #cabfa0;
+        color: rgba(74, 62, 42, 0.55);
         font-family: "Special Elite", monospace;
-        letter-spacing: 0.22em;
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
+        padding: 12px 10px;
+        line-height: 1.5;
+        box-shadow: 0 3px 8px rgba(15, 10, 5, 0.3);
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      /* ============ 0 · SCRAP NOTE ============ */
+      .scrapnote {
+        width: 236px;
+        margin: 10px 0 0 11%;
+        padding: 14px 16px 12px;
+        background: var(--paper-white);
+        font-family: "Special Elite", monospace;
         font-size: 0.78rem;
-        color: var(--rust);
-        margin-bottom: 20px;
-      }
-      .double-rule {
-        max-width: 420px;
-        margin: 0 auto;
-        height: 6px;
-        border-top: 1px solid var(--ink-2);
-        border-bottom: 1px solid var(--ink-2);
-        opacity: 0.7;
-      }
-      .double-rule.top {
-        margin-bottom: 26px;
-      }
-      h1 {
-        font-family: "Rye", serif;
-        font-weight: 400;
-        font-size: clamp(2.6rem, 10vw, 5.4rem);
-        line-height: 1.03;
-        letter-spacing: 0.01em;
-        color: var(--ink);
-        text-shadow:
-          1px 1px 0 rgba(62, 49, 34, 0.35),
-          2px 2px 0 rgba(94, 66, 36, 0.15);
-      }
-      .hero-stars {
-        margin-top: 26px;
-      }
-      .double-rule.bottom {
-        margin-top: 22px;
-      }
-      .hero-sub {
-        max-width: 50ch;
-        margin: 24px auto 0;
-        font-style: italic;
-        font-size: 1.12rem;
+        line-height: 1.6;
         color: var(--ink-2);
+        transform: rotate(-3.2deg);
+        clip-path: polygon(0 4%, 7% 0, 96% 2%, 100% 12%, 98% 91%, 88% 100%, 4% 97%, 0 88%);
+        z-index: 2;
       }
-      .reveal {
-        animation: rise 0.8s ease both;
-      }
-      .reveal.d1 {
-        animation-delay: 0.12s;
-      }
-      .reveal.d2 {
-        animation-delay: 0.26s;
-      }
-      .reveal.d3 {
-        animation-delay: 0.4s;
-      }
-      @keyframes rise {
-        from {
-          opacity: 0;
-          transform: translateY(14px);
-        }
-        to {
-          opacity: 1;
-          transform: none;
-        }
+      .scrapnote .staple {
+        top: -3px;
+        left: 24px;
+        transform: rotate(7deg);
       }
 
-      .ticket-edge {
-        height: 16px;
-        background: radial-gradient(
-          circle at 8px -4px,
-          transparent 10px,
-          var(--stain) 10.5px
-        );
-        background-size: 16px 16px;
-        opacity: 0.18;
-      }
-
-      /* ---------- marquee strip · faded ink band ---------- */
-      .strip {
-        background:
-          radial-gradient(
-            ellipse 40% 100% at 25% 50%,
-            rgba(231, 215, 174, 0.06),
-            transparent 70%
-          ),
-          radial-gradient(
-            ellipse 30% 100% at 75% 50%,
-            rgba(231, 215, 174, 0.05),
-            transparent 70%
-          ),
-          var(--ink-2);
-        color: rgba(231, 215, 174, 0.82);
-        font-family: "Special Elite", monospace;
-        text-transform: uppercase;
-        letter-spacing: 0.2em;
-        font-size: 0.72rem;
-        padding: 11px 0;
-        overflow: hidden;
-        white-space: nowrap;
-        box-shadow:
-          inset 0 2px 4px rgba(20, 14, 8, 0.4),
-          inset 0 -2px 4px rgba(20, 14, 8, 0.4);
-      }
-      .strip-inner {
-        display: inline-block;
-        animation: crawl 48s linear infinite;
-      }
-      .strip-inner span {
-        padding: 0 0.6em;
-      }
-      @keyframes crawl {
-        from {
-          transform: translateX(0);
-        }
-        to {
-          transform: translateX(-50%);
-        }
-      }
-
-      /* ---------- paper sheets ---------- */
-      .band {
-        background:
-          radial-gradient(
-            ellipse 55% 60% at 82% 10%,
-            rgba(138, 107, 68, 0.07),
-            transparent 70%
-          ),
-          radial-gradient(
-            ellipse 45% 50% at 8% 85%,
-            rgba(138, 107, 68, 0.06),
-            transparent 70%
-          ),
-          var(--parchment-light);
-        border-top: 1px solid rgba(62, 49, 34, 0.45);
-        border-bottom: 1px solid rgba(62, 49, 34, 0.45);
-        box-shadow:
-          inset 0 6px 14px -8px rgba(94, 66, 36, 0.35),
-          inset 0 -6px 14px -8px rgba(94, 66, 36, 0.35),
-          0 1px 0 rgba(36, 28, 18, 0.15),
-          0 -1px 0 rgba(36, 28, 18, 0.15);
-      }
-
-      section {
-        padding: 72px 0;
-      }
-
-      /* ---------- THE REWARD ---------- */
-      .reward-list {
-        list-style: none;
-        max-width: 600px;
-        margin: 0 auto;
-      }
-      .reward-list li {
-        padding: 20px 0 20px 46px;
+      /* ============ 1 · WANTED POSTER ============ */
+      .zone {
         position: relative;
-        font-size: 1.06rem;
       }
-      .reward-list li + li {
-        border-top: 1px dashed rgba(62, 49, 34, 0.4);
-      }
-      .reward-list li::before {
-        content: "★";
-        position: absolute;
-        left: 8px;
-        top: 19px;
-        color: var(--rust);
-        font-size: 1.15rem;
-      }
-      .reward-list strong {
-        color: var(--ink);
-        font-weight: 400;
-        text-transform: uppercase;
-        letter-spacing: 0.03em;
-        font-size: 0.98em;
-      }
-      .reward-band {
+      .poster-wrap {
         position: relative;
-        overflow: hidden;
+        width: min(430px, 88%);
+        margin: 34px 0 0 auto;
+        margin-right: 6%;
+        z-index: 3;
       }
-      .reward-side {
-        position: absolute;
-        top: 50%;
-        right: 26px;
-        transform: translateY(-50%);
-        writing-mode: vertical-rl;
-        font-family: "Special Elite", monospace;
-        text-transform: uppercase;
-        letter-spacing: 0.32em;
-        font-size: 0.7rem;
-        color: var(--rust);
-        opacity: 0.6;
-        white-space: nowrap;
+      .relic-a {
+        top: 30px;
+        left: -54px;
+        width: 120px;
+        transform: rotate(-9deg);
+        clip-path: polygon(0 0, 100% 6%, 92% 100%, 8% 92%);
       }
-      @media (max-width: 1020px) {
-        .reward-side {
-          display: none;
-        }
+      .tilt {
+        transform: rotate(-1.6deg);
       }
-
-      /* ---------- THE NUMBERS · ink stamps ---------- */
-      .counters {
-        display: flex;
-        gap: 26px;
-        justify-content: center;
-        align-items: stretch;
-        flex-wrap: wrap;
-      }
-      .counter {
+      .poster {
         background:
-          radial-gradient(
-            ellipse 80% 70% at 50% 30%,
-            rgba(244, 234, 204, 0.6),
-            transparent 90%
-          ),
-          var(--parchment-light);
-        color: var(--ink);
-        padding: 30px 34px;
+          radial-gradient(ellipse 65% 40% at 82% 8%, rgba(138, 107, 68, 0.16), transparent 70%),
+          radial-gradient(ellipse 40% 30% at 8% 88%, rgba(138, 107, 68, 0.12), transparent 70%),
+          var(--parchment-lt);
+        border: 2px solid var(--ink);
+        outline: 1px solid rgba(62, 49, 34, 0.6);
+        outline-offset: -7px;
+        padding: 26px 22px 14px;
         text-align: center;
-        min-width: 216px;
-        position: relative;
-        border: 3px solid rgba(94, 42, 30, 0.75);
-        border-radius: 4px;
-        box-shadow:
-          inset 0 0 0 2px var(--parchment-light),
-          inset 0 0 0 3px rgba(94, 42, 30, 0.45),
-          0 2px 6px rgba(60, 40, 20, 0.2),
-          0 8px 20px rgba(94, 66, 36, 0.18);
+        z-index: 2;
       }
-      .counter:nth-child(1) {
-        transform: rotate(-1.8deg);
-      }
-      .counter:nth-child(2) {
-        transform: rotate(1.3deg) translateY(10px);
-      }
-      .counter:nth-child(3) {
-        transform: rotate(-0.8deg);
-      }
-      .counter .num {
-        font-family: "Alfa Slab One", serif;
-        font-weight: 400;
-        font-size: 2.7rem;
-        line-height: 1.15;
-        color: var(--rust);
-        display: block;
-        margin-bottom: 8px;
-        text-shadow: 1px 1px 0 rgba(94, 42, 30, 0.2);
-      }
-      .counter .lab {
-        font-family: "Special Elite", monospace;
-        text-transform: uppercase;
-        letter-spacing: 0.14em;
-        font-size: 0.72rem;
-        line-height: 1.7;
-        color: var(--ink-2);
-      }
-      .counter-note {
-        text-align: center;
-        font-style: italic;
-        font-size: 0.98rem;
-        margin-top: 34px;
-        color: var(--ink-2);
-      }
-
-      /* ---------- ABOUT US ---------- */
-      .about h2 {
-        font-family: "Alfa Slab One", serif;
-        font-weight: 400;
-        font-size: clamp(1.45rem, 4.2vw, 1.95rem);
-        text-shadow: none;
-        letter-spacing: 0.01em;
-      }
-      .about-grid {
-        display: grid;
-        gap: 44px;
-        margin-top: 8px;
-      }
-      @media (min-width: 780px) {
-        .about-grid {
-          grid-template-columns: 340px 1fr;
-          gap: 52px;
-          align-items: start;
-        }
-        .keepsake-col {
-          margin-top: 14px;
-        }
-      }
-      .keepsake {
-        max-width: 340px;
-        margin: 0 auto;
-        background:
-          radial-gradient(
-            ellipse 70% 50% at 80% 90%,
-            rgba(138, 107, 68, 0.14),
-            transparent 70%
-          ),
-          radial-gradient(
-            ellipse 40% 30% at 10% 8%,
-            rgba(138, 107, 68, 0.1),
-            transparent 70%
-          ),
-          var(--parchment-light);
-        border: 1px solid rgba(94, 66, 36, 0.35);
-        padding: 13px 13px 12px;
-        transform: rotate(-2.4deg);
-        box-shadow:
-          0 12px 26px rgba(60, 40, 20, 0.35),
-          0 3px 8px rgba(60, 40, 20, 0.2);
-        position: relative;
-      }
-      .keepsake::before,
-      .keepsake::after {
+      /* curling top-right corner */
+      .poster::after {
         content: "";
         position: absolute;
-        top: -12px;
-        width: 86px;
-        height: 26px;
-        background: rgba(200, 175, 126, 0.75);
-        border: 1px solid rgba(94, 66, 36, 0.25);
-        box-shadow: 0 1px 2px rgba(60, 40, 20, 0.2);
+        top: -2px;
+        right: -2px;
+        width: 34px;
+        height: 34px;
+        background: linear-gradient(225deg, var(--fog-hi) 0 48%, #cbb98d 50%, var(--parchment) 62%, rgba(0, 0, 0, 0.18) 100%);
+        box-shadow: -3px 3px 5px rgba(15, 10, 5, 0.3);
       }
-      .keepsake::before {
-        left: -26px;
-        transform: rotate(-38deg);
+      .poster h1 {
+        font-family: "Rye", serif;
+        font-weight: 400;
+        font-size: clamp(2.3rem, 9.5vw, 3.2rem);
+        line-height: 0.95;
+        letter-spacing: 0.01em;
+        text-shadow: 1px 1px 0 rgba(62, 49, 34, 0.3);
       }
-      .keepsake::after {
-        right: -26px;
-        transform: rotate(38deg);
+      .poster .subline {
+        font-family: "Special Elite", monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.34em;
+        text-indent: 0.34em;
+        font-size: 0.72rem;
+        color: var(--rust);
+        margin: 8px 0 2px;
       }
-      .keepsake .photo {
-        aspect-ratio: 4/3;
+      .poster .stars {
+        letter-spacing: 0.45em;
+        text-indent: 0.45em;
+        color: var(--ink-2);
+        font-size: 0.95rem;
+        margin-bottom: 12px;
+      }
+      .poster .mug {
+        width: 78%;
+        margin: 0 auto;
+        aspect-ratio: 5 / 4;
+        border: 2px solid var(--ink);
         background-image:
           url("ha-and-chris.jpeg"),
-          repeating-linear-gradient(
-            45deg,
-            rgba(62, 49, 34, 0.12) 0 12px,
-            rgba(62, 49, 34, 0.04) 12px 24px
-          );
+          repeating-linear-gradient(45deg, rgba(62, 49, 34, 0.16) 0 10px, rgba(62, 49, 34, 0.05) 10px 20px);
         background-size: cover, auto;
-        background-position: center, center;
-        background-repeat: no-repeat, repeat;
-        background-color: #d9c495;
-        filter: sepia(0.55) contrast(1.12) saturate(0.75) brightness(0.98);
-        border: 1px solid rgba(62, 49, 34, 0.3);
+        background-position: center 30%, center;
+        background-color: #d3c294;
+        filter: grayscale(0.85) sepia(0.35) contrast(1.25) brightness(1.02);
       }
-      .keepsake figcaption {
+      .poster .mug-cap {
         font-family: "Special Elite", monospace;
-        font-size: 0.78rem;
-        text-align: center;
-        padding: 12px 6px 6px;
-        color: rgba(62, 49, 34, 0.85);
-        letter-spacing: 0.04em;
+        font-size: 0.66rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-2);
+        margin: 6px 0 10px;
       }
-      .about-copy p {
-        margin-bottom: 18px;
-        font-size: 1.06rem;
-        max-width: 56ch;
+      .poster .reward {
+        font-family: "Alfa Slab One", serif;
+        font-weight: 400;
+        font-size: clamp(1.2rem, 4.5vw, 1.55rem);
+        color: var(--rust);
+        line-height: 1.2;
       }
-      .pull {
-        border: none;
-        margin: 34px 0 36px;
-        padding: 0 0 0 26px;
-        border-left: 4px solid var(--rust);
+      .poster .reward small {
+        display: block;
+        font-family: "Special Elite", monospace;
+        font-size: 0.66rem;
+        letter-spacing: 0.28em;
+        color: var(--ink-2);
+        margin-top: 2px;
+      }
+      .poster .want {
+        font-style: italic;
+        font-size: 1.04rem;
+        margin: 12px auto 4px;
         max-width: 30ch;
       }
-      .pull p {
-        font-family: "IM Fell English", serif;
-        font-style: italic;
-        font-size: clamp(1.35rem, 3.6vw, 1.7rem);
-        line-height: 1.35;
-        color: var(--rust);
-        margin: 0;
-      }
-      .cred-list {
-        list-style: none;
-        max-width: 52ch;
-        margin: 0 0 22px;
-      }
-      .cred-list li {
-        padding: 9px 0 9px 30px;
-        position: relative;
-        font-size: 1.02rem;
-      }
-      .cred-list li + li {
-        border-top: 1px dashed rgba(62, 49, 34, 0.35);
-      }
-      .cred-list li::before {
-        content: "✓";
-        position: absolute;
-        left: 4px;
-        color: var(--rust);
-        font-weight: 700;
-      }
-      .ready-line {
-        font-weight: 400;
-        color: var(--rust);
-      }
-      .ps-line {
-        margin-top: 18px;
-        font-size: 0.95rem;
-        font-style: italic;
+      .poster .fine {
+        font-family: "Special Elite", monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
         color: var(--ink-2);
+        margin-bottom: 10px;
+      }
+      .poster .rip-hint {
+        font-family: "Caveat", cursive;
+        font-size: 1.06rem;
+        color: var(--rust);
+        transform: rotate(-1.4deg);
+        display: block;
+        margin-bottom: 2px;
+      }
+      .staple.p-tl { top: -5px; left: 14px; transform: rotate(-12deg); }
+      .staple.p-tr { top: 34px; right: -8px; transform: rotate(81deg); }
+      .staple.p-bl { bottom: 84px; left: -9px; transform: rotate(99deg); }
+
+      /* tear-off tab fringe */
+      .tabs {
+        display: flex;
+        align-items: flex-start;
+        border-top: 1.5px dashed rgba(62, 49, 34, 0.65);
+        margin: -1px 2px 0;
+        position: relative;
+        z-index: 2;
+        filter: drop-shadow(0 6px 8px rgba(15, 10, 5, 0.3));
+      }
+      .tab {
+        flex: 1;
+        height: 78px;
+        appearance: none;
+        border: none;
+        border-left: 1.5px dashed rgba(62, 49, 34, 0.55);
+        background: var(--parchment-lt);
+        font-family: "Special Elite", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.06em;
+        color: var(--ink-2);
+        writing-mode: vertical-rl;
+        padding: 8px 0;
+        cursor: pointer;
+        transition: transform 0.15s ease;
+      }
+      .tab:first-child {
+        border-left: none;
+      }
+      .tab:not(.stub):hover {
+        transform: translateY(3px) rotate(1.5deg);
+        background: #f9f0d8;
+      }
+      .tab:not(.stub):focus-visible {
+        outline: 3px dashed var(--rust);
+        outline-offset: -4px;
+      }
+      .tab.stub {
+        height: 20px;
+        cursor: default;
+        color: transparent;
+        background: var(--parchment);
+        clip-path: polygon(0 0, 100% 0, 100% 42%, 78% 74%, 52% 48%, 30% 88%, 12% 55%, 0 78%);
+        pointer-events: none;
+      }
+      .tab.tearing {
+        animation: tearoff 0.55s ease-in forwards;
+        transform-origin: top left;
+        pointer-events: none;
+      }
+      @keyframes tearoff {
+        30% { transform: translate(2px, 8px) rotate(6deg); }
+        100% { transform: translate(26px, 130px) rotate(38deg); opacity: 0; }
+      }
+      .tab-toast {
+        position: absolute;
+        left: 50%;
+        bottom: -54px;
+        transform: translateX(-50%) rotate(-2deg);
+        background: var(--ink);
+        color: var(--parchment-lt);
+        font-family: "Special Elite", monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        padding: 8px 14px;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.25s ease;
+        z-index: 8;
+        box-shadow: 0 4px 10px rgba(15, 10, 5, 0.4);
+      }
+      .tab-toast.show {
+        opacity: 1;
+      }
+
+      /* ============ 2 · POLAROID + INDEX CARD ============ */
+      .photo-row {
+        position: relative;
+        margin-top: 34px;
+        min-height: 340px;
+        z-index: 2;
+      }
+      .polaroid {
+        position: absolute;
+        top: 0;
+        left: -3%;
+        width: min(268px, 62%);
+        background: #fbf8ef;
+        padding: 11px 11px 44px;
+        transform: rotate(3.4deg);
+        z-index: 3;
+      }
+      .polaroid .shot {
+        aspect-ratio: 1 / 0.96;
+        background-image:
+          url("ha-and-chris.jpeg"),
+          repeating-linear-gradient(45deg, rgba(62, 49, 34, 0.14) 0 12px, rgba(62, 49, 34, 0.04) 12px 24px);
+        background-size: cover, auto;
+        background-position: center, center;
+        background-color: #d9c495;
+        filter: saturate(0.9) contrast(1.05);
+        border: 1px solid rgba(40, 30, 18, 0.15);
+      }
+      .polaroid figcaption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 7px;
+        text-align: center;
+        font-family: "Caveat", cursive;
+        font-size: 1.22rem;
+        color: #33291b;
+      }
+      .polaroid .tape {
+        top: -13px;
+        left: 50%;
+        transform: translateX(-50%) rotate(-4deg);
+      }
+      .indexcard {
+        position: absolute;
+        top: 96px;
+        right: 2%;
+        width: min(348px, 72%);
+        background:
+          repeating-linear-gradient(180deg, transparent 0 27px, rgba(94, 130, 176, 0.45) 27px 28px),
+          linear-gradient(180deg, transparent 34px, transparent 34px),
+          #f9f4e2;
+        background-position: 0 44px, 0 0, 0 0;
+        border-top: 3px solid rgba(176, 88, 80, 0.75);
+        padding: 12px 18px 18px;
+        transform: rotate(-2.1deg);
+        z-index: 4;
+      }
+      .indexcard blockquote {
+        font-family: "Caveat", cursive;
+        font-size: 1.42rem;
+        line-height: 28px;
+        color: #2b2115;
+        border: none;
+      }
+      .indexcard cite {
+        display: block;
+        font-family: "Caveat", cursive;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 1.18rem;
+        color: var(--rust);
+        text-align: right;
+        margin-top: 2px;
+      }
+      .indexcard .tack {
+        top: -7px;
+        right: 30px;
+      }
+
+      /* ============ 3 · TYPED LETTER ============ */
+      .letter-wrap {
+        position: relative;
+        margin-top: -22px;
+        z-index: 2;
+      }
+      .relic-b {
+        bottom: -26px;
+        right: -30px;
+        width: 130px;
+        transform: rotate(6deg);
+        clip-path: polygon(4% 0, 100% 8%, 96% 94%, 0 100%);
+      }
+      .letter {
+        position: relative;
+        z-index: 2;
+        width: min(560px, 94%);
+        margin-left: 3%;
+        background:
+          linear-gradient(180deg, rgba(46, 34, 20, 0.07) 0, transparent 2px),
+          linear-gradient(180deg, transparent calc(33% - 1px), rgba(46, 34, 20, 0.13) 33%, rgba(255, 255, 255, 0.5) calc(33% + 1px), transparent calc(33% + 2px)),
+        linear-gradient(180deg, transparent calc(66% - 1px), rgba(46, 34, 20, 0.13) 66%, rgba(255, 255, 255, 0.5) calc(66% + 1px), transparent calc(66% + 2px)),
+          var(--paper-white);
+        padding: 34px 36px 30px;
+        font-family: "Special Elite", monospace;
+        font-size: 0.86rem;
+        line-height: 1.75;
+        color: #2a2115;
+        transform: rotate(0.9deg);
+        z-index: 2;
+      }
+      .letter h2 {
+        font-family: "Special Elite", monospace;
+        font-weight: 400;
+        font-size: 1rem;
+        margin-bottom: 16px;
+      }
+      .letter p {
+        margin-bottom: 13px;
+      }
+      .letter ul {
+        list-style: none;
+        margin: 0 0 13px;
+      }
+      .letter li {
+        padding-left: 22px;
+        position: relative;
+      }
+      .letter li::before {
+        content: "x";
+        position: absolute;
+        left: 2px;
+        color: var(--rust);
+      }
+      .letter .ready {
+        color: var(--rust);
+      }
+      .letter .sig {
+        font-family: "Caveat", cursive;
+        font-size: 1.75rem;
+        color: #33291b;
+        transform: rotate(-2deg);
+        display: inline-block;
+        margin-top: 4px;
+      }
+      .letter .tack.lt { top: -7px; left: 44px; }
+      .letter .tack.rt { top: -5px; right: 52px; }
+
+      /* ============ 4 · CLIPPING + STICKY ============ */
+      .refs-row {
+        position: relative;
+        margin-top: 66px;
+        min-height: 330px;
+        z-index: 2;
+      }
+      .clipping {
+        position: absolute;
+        top: 26px;
+        left: 6%;
+        width: min(330px, 74%);
+        background:
+          radial-gradient(ellipse 60% 40% at 20% 10%, rgba(120, 104, 70, 0.14), transparent 70%),
+          var(--news);
+        padding: 16px 38px 18px 20px;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #292216;
+        transform: rotate(-2.4deg);
+        clip-path: polygon(0 3%, 4% 0, 31% 2%, 55% 0, 82% 2%, 100% 1%, 99% 38%, 100% 71%, 98% 97%, 74% 100%, 46% 98%, 18% 100%, 1% 97%, 2% 62%, 0 30%);
+        z-index: 2;
+      }
+      .clipping .kicker {
+        font-family: "Special Elite", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--rust);
+        border-bottom: 1px solid rgba(41, 34, 22, 0.4);
+        padding-bottom: 4px;
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .clipping h3 {
+        font-family: "Alfa Slab One", serif;
+        font-weight: 400;
+        font-size: 1.02rem;
+        line-height: 1.25;
+        margin-bottom: 6px;
+      }
+      .clipping blockquote {
+        border: none;
+        font-style: italic;
+      }
+      .clipping cite {
+        display: block;
+        font-style: normal;
+        font-family: "Special Elite", monospace;
+        font-size: 0.66rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-top: 8px;
+        color: #4a3e2a;
+      }
+      .clipping .tape {
+        top: -12px;
+        right: 28px;
+        transform: rotate(3deg);
+        width: 74px;
+      }
+      .sticky {
+        position: absolute;
+        top: 0;
+        right: 21%;
+        width: min(232px, 56%);
+        background: linear-gradient(180deg, #f6e386, var(--sticky) 78%, #d9bf4e);
+        padding: 18px 18px 22px;
+        font-family: "Caveat", cursive;
+        font-size: 1.4rem;
+        line-height: 1.25;
+        color: #33260f;
+        transform: rotate(4.2deg);
+        z-index: 3;
+        box-shadow:
+          0 2px 3px rgba(15, 10, 5, 0.25),
+          0 12px 18px rgba(15, 10, 5, 0.3);
+      }
+      .sticky::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        border-style: solid;
+        border-width: 0 0 22px 24px;
+        border-color: transparent transparent rgba(15, 10, 5, 0.18) transparent;
+      }
+      .sticky cite {
+        display: block;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--rust);
+        margin-top: 6px;
+        text-align: right;
+      }
+      /* joanne card handled above; third ref = due card below */
+
+      /* ============ 5 · DUE-DATE CARD ============ */
+      .duecard-wrap {
+        position: relative;
+        margin-top: 64px;
+        z-index: 2;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .duecard {
+        width: min(370px, 90%);
+        margin-right: 9%;
+        background: var(--manila);
+        padding: 0 0 14px;
+        font-family: "Special Elite", monospace;
+        color: #35291a;
+        transform: rotate(1.8deg);
+      }
+      .duecard h2 {
+        font-family: "Special Elite", monospace;
+        font-weight: 400;
+        font-size: 0.78rem;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 13px 10px 9px;
+        border-bottom: 2px solid rgba(53, 41, 26, 0.7);
+      }
+      .duecard .pocket-note {
+        text-align: center;
+        font-size: 0.6rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #6b5a3d;
+        padding: 5px 0 2px;
+      }
+      .duecard table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .duecard td {
+        border-bottom: 1px solid rgba(53, 41, 26, 0.35);
+        padding: 9px 12px 7px;
+        font-size: 0.78rem;
+        vertical-align: middle;
+      }
+      .duecard td.stamp {
+        width: 92px;
+        font-size: 0.82rem;
+        color: #8c2f1d;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        white-space: nowrap;
+      }
+      .duecard tr:nth-child(1) .stamp-ink { transform: rotate(-3deg); opacity: 0.88; }
+      .duecard tr:nth-child(2) .stamp-ink { transform: rotate(2deg); opacity: 0.72; }
+      .duecard tr:nth-child(3) .stamp-ink { transform: rotate(-1.5deg); opacity: 0.8; }
+      .stamp-ink {
+        display: inline-block;
+        border: 1.5px solid rgba(140, 47, 29, 0.65);
+        padding: 1px 5px;
+      }
+      .duecard .big {
+        font-family: "Alfa Slab One", serif;
+        font-size: 1.05rem;
+        color: var(--rust);
+        margin-right: 4px;
+      }
+      .duecard .staple.d1 { top: -5px; left: 38px; transform: rotate(4deg); }
+
+      /* ============ 6 · CONTACT FLYER ============ */
+      .flyer-wrap {
+        position: relative;
+        margin-top: 78px;
+        z-index: 3;
+      }
+      .flyer {
+        width: min(486px, 94%);
+        margin-left: 6%;
+        background:
+          radial-gradient(ellipse 70% 40% at 85% 92%, rgba(138, 107, 68, 0.1), transparent 70%),
+          #fbf7ea;
+        border: 2px solid var(--ink);
+        padding: 28px 28px 24px;
+        text-align: center;
+        transform: rotate(-1.1deg);
+      }
+      .flyer h2 {
+        font-family: "Alfa Slab One", serif;
+        font-weight: 400;
+        font-size: clamp(1.3rem, 5vw, 1.7rem);
+        line-height: 1.2;
+        margin-bottom: 10px;
+      }
+      .flyer p {
+        font-size: 1rem;
+        max-width: 40ch;
+        margin: 0 auto 8px;
       }
       .btn-row {
         display: flex;
-        gap: 16px;
+        gap: 14px;
         flex-wrap: wrap;
-        margin-top: 28px;
+        justify-content: center;
+        margin-top: 18px;
       }
       .btn {
         font-family: "Alfa Slab One", serif;
         font-weight: 400;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-size: 0.8rem;
+        letter-spacing: 0.07em;
+        font-size: 0.76rem;
         text-decoration: none;
-        padding: 15px 24px;
+        padding: 14px 20px;
         border: 2px solid var(--ink);
         color: var(--ink);
-        background: var(--parchment-light);
-        box-shadow:
-          inset 0 0 0 1px var(--parchment-light),
-          inset 0 0 0 2px rgba(36, 28, 18, 0.5),
-          3px 3px 0 rgba(36, 28, 18, 0.85);
-        transition:
-          transform 0.12s ease,
-          box-shadow 0.12s ease;
+        background: var(--parchment-lt);
+        box-shadow: 3px 3px 0 rgba(36, 28, 18, 0.85);
+        transition: transform 0.12s ease, box-shadow 0.12s ease;
         display: inline-block;
       }
       .btn.primary {
         background: var(--rust);
-        color: var(--parchment-light);
-        box-shadow:
-          inset 0 0 0 1px var(--rust),
-          inset 0 0 0 2px rgba(244, 234, 204, 0.5),
-          3px 3px 0 rgba(36, 28, 18, 0.85);
+        color: var(--parchment-lt);
       }
       .btn:hover {
         transform: translate(-2px, -2px);
-        box-shadow:
-          inset 0 0 0 1px var(--parchment-light),
-          inset 0 0 0 2px rgba(36, 28, 18, 0.5),
-          5px 5px 0 rgba(36, 28, 18, 0.85);
-      }
-      .btn.primary:hover {
-        box-shadow:
-          inset 0 0 0 1px var(--rust),
-          inset 0 0 0 2px rgba(244, 234, 204, 0.5),
-          5px 5px 0 rgba(36, 28, 18, 0.85);
+        box-shadow: 5px 5px 0 rgba(36, 28, 18, 0.85);
       }
       .btn:active {
         transform: translate(2px, 2px);
-        box-shadow:
-          inset 0 0 0 1px var(--parchment-light),
-          inset 0 0 0 2px rgba(36, 28, 18, 0.5),
-          1px 1px 0 rgba(36, 28, 18, 0.85);
-      }
-      .btn.primary:active {
-        box-shadow:
-          inset 0 0 0 1px var(--rust),
-          inset 0 0 0 2px rgba(244, 234, 204, 0.5),
-          1px 1px 0 rgba(36, 28, 18, 0.85);
+        box-shadow: 1px 1px 0 rgba(36, 28, 18, 0.85);
       }
       .btn:focus-visible {
         outline: 3px dashed var(--rust);
         outline-offset: 4px;
       }
-
-      /* ---------- TESTIMONIALS ---------- */
-      .testi-stack {
-        display: flex;
-        flex-direction: column;
-        gap: 26px;
-        max-width: 620px;
-        margin: 0 auto;
-      }
-      .testi {
-        background:
-          radial-gradient(
-            ellipse 60% 60% at 85% 15%,
-            rgba(138, 107, 68, 0.09),
-            transparent 70%
-          ),
-          var(--parchment-light);
-        border: 1px solid rgba(62, 49, 34, 0.5);
-        padding: 24px 26px 20px;
-        font-size: 1.02rem;
-        line-height: 1.7;
-        box-shadow:
-          0 1px 2px rgba(36, 28, 18, 0.2),
-          0 6px 16px rgba(94, 66, 36, 0.22),
-          2px 2px 0 rgba(36, 28, 18, 0.08);
-      }
-      .testi .stars {
-        color: var(--rust);
-        letter-spacing: 0.15em;
-        margin-bottom: 8px;
-        font-size: 1rem;
-      }
-      .testi .who {
-        display: block;
-        margin-top: 12px;
-        font-size: 0.76rem;
+      .flyer .or-text {
+        margin-top: 14px;
         font-family: "Special Elite", monospace;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--ink-2);
-      }
-      @media (min-width: 700px) {
-        .testi:nth-child(1) {
-          transform: rotate(-0.7deg) translateX(-30px);
-        }
-        .testi:nth-child(2) {
-          transform: rotate(0.6deg) translateX(34px);
-        }
-        .testi:nth-child(3) {
-          transform: rotate(-0.4deg) translateX(-14px);
-        }
-      }
-      @media (max-width: 699px) {
-        .testi:nth-child(odd) {
-          transform: rotate(-0.5deg);
-        }
-        .testi:nth-child(even) {
-          transform: rotate(0.5deg);
-        }
-      }
-
-      /* ---------- SIGHTING ---------- */
-      .sighting-box {
-        max-width: 560px;
-        margin: 0 auto;
-        border: 2px dashed var(--ink-2);
-        outline: 1px solid rgba(62, 49, 34, 0.35);
-        outline-offset: 5px;
-        padding: 44px 28px 40px;
-        text-align: center;
-        background:
-          radial-gradient(
-            ellipse 60% 50% at 20% 90%,
-            rgba(138, 107, 68, 0.08),
-            transparent 70%
-          ),
-          rgba(244, 234, 204, 0.6);
-      }
-      .sighting-box .sec-head {
-        margin-bottom: 0;
-      }
-      .sighting-box h2 {
-        margin-bottom: 18px;
-      }
-      .sighting-box p {
-        max-width: 44ch;
-        margin: 0 auto 8px;
-        font-size: 1.06rem;
-      }
-      .sighting-box .btn-row {
-        justify-content: center;
-      }
-
-      .mail-fallback {
-        margin-top: 16px;
-        font-family: "Special Elite", monospace;
-        font-size: 0.76rem;
+        font-size: 0.74rem;
         letter-spacing: 0.06em;
         color: var(--ink-2);
-        text-align: center;
       }
-      .copy-email,
-      .text-link {
-        font: inherit;
-        text-decoration: none;
+      .flyer .or-text a {
         color: var(--rust);
-        background: none;
-        border: none;
+        text-decoration: none;
         border-bottom: 1px dashed var(--rust);
-        cursor: pointer;
         padding: 0 2px;
       }
-      .copy-email:hover,
-      .text-link:hover {
+      .flyer .or-text a:hover {
         background: rgba(94, 42, 30, 0.08);
       }
-      .copy-email:focus-visible,
-      .text-link:focus-visible {
+      .flyer .or-text a:focus-visible {
         outline: 2px dashed var(--rust);
         outline-offset: 3px;
       }
+      .flyer .staple.f1 { top: -6px; left: 12px; transform: rotate(-8deg); }
+      .flyer .staple.f2 { top: -6px; right: 16px; transform: rotate(11deg); }
+      .flyer .staple.f3 { bottom: -6px; left: 20px; transform: rotate(184deg); }
+      .flyer .staple.f4 { bottom: -6px; right: 10px; transform: rotate(174deg); }
 
-      /* ---------- be our hero · gilt portrait ---------- */
-      .hero-portrait {
-        text-align: center;
+      /* ============ 7 · HANGING GILT FRAME ============ */
+      .hang {
+        position: relative;
+        margin-top: 96px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 2;
       }
-      .gilt-frame {
-        width: min(360px, 82vw);
-        margin: 0 auto;
-        padding: 18px;
-        background: linear-gradient(
-          135deg,
-          #7c5a1f,
-          #d8b04a 20%,
-          #a6802e 45%,
-          #e2c271 62%,
-          #8a6423 85%,
-          #6b4e1b
-        );
+      .nail {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 36% 32%, #cfd3d5, #74797c 55%, #3c4043 95%);
+        box-shadow: 0 2px 4px rgba(10, 8, 5, 0.6);
+        position: relative;
+        z-index: 3;
+      }
+      .swinger {
+        transform-origin: 50% 8px;
+        margin-top: -7px;
+        animation: sway 7s ease-in-out infinite alternate;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      @keyframes sway {
+        from { transform: rotate(-1.9deg); }
+        to { transform: rotate(1.1deg); }
+      }
+      .strings {
+        width: 210px;
+        height: 64px;
+        position: relative;
+        z-index: 1;
+      }
+      .strings::before,
+      .strings::after {
+        content: "";
+        position: absolute;
+        top: 4px;
+        left: 50%;
+        width: 2px;
+        height: 118px;
+        background: #d9cfae;
+        box-shadow: 0 1px 2px rgba(10, 8, 5, 0.5);
+        transform-origin: top center;
+      }
+      .strings::before { transform: rotate(-58deg); }
+      .strings::after { transform: rotate(58deg); }
+      .gilt {
+        width: min(300px, 76vw);
+        padding: 16px;
+        margin-top: -6px;
+        background: linear-gradient(135deg, #7c5a1f, #d8b04a 20%, #a6802e 45%, #e2c271 62%, #8a6423 85%, #6b4e1b);
         box-shadow:
-          0 14px 30px rgba(36, 28, 18, 0.35),
+          0 16px 30px rgba(15, 10, 5, 0.45),
           inset 0 2px 3px rgba(255, 236, 190, 0.55),
           inset 0 -2px 3px rgba(60, 42, 12, 0.6);
-        transform: rotate(-1.2deg);
+        position: relative;
+        z-index: 2;
       }
       .gilt-lip {
         padding: 7px;
-        background: linear-gradient(
-          315deg,
-          #7c5a1f,
-          #c79e3f 30%,
-          #8a6423 60%,
-          #ddba5c
-        );
+        background: linear-gradient(315deg, #7c5a1f, #c79e3f 30%, #8a6423 60%, #ddba5c);
         box-shadow: inset 0 0 0 1px rgba(60, 42, 12, 0.5);
       }
       .portrait {
         aspect-ratio: 4 / 5;
         background:
-          radial-gradient(
-            ellipse 70% 60% at 50% 42%,
-            rgba(244, 234, 204, 0.25),
-            transparent 75%
-          ),
+          radial-gradient(ellipse 70% 60% at 50% 42%, rgba(244, 234, 204, 0.25), transparent 75%),
           linear-gradient(rgba(36, 28, 18, 0.14), rgba(36, 28, 18, 0.3)),
           var(--parchment);
         box-shadow: inset 0 0 42px rgba(36, 28, 18, 0.5);
@@ -868,440 +911,453 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 8px;
-        padding: 20px;
+        gap: 6px;
+        padding: 18px;
       }
-      .portrait-q {
+      .portrait .q {
         font-family: "Rye", serif;
-        font-size: clamp(5rem, 18vw, 7rem);
+        font-size: clamp(4.4rem, 16vw, 6rem);
         line-height: 1;
-        color: rgba(36, 28, 18, 0.22);
+        color: rgba(36, 28, 18, 0.24);
         text-shadow: 1px 1px 0 rgba(244, 234, 204, 0.35);
       }
-      .portrait-caption {
-        font-family: "IM Fell English", serif;
+      .portrait .cap {
         font-style: italic;
-        font-size: 1.15rem;
+        font-size: 1.1rem;
         color: var(--ink-2);
       }
       .nameplate {
         font-family: "Special Elite", monospace;
         display: inline-block;
-        margin-top: 24px;
-        padding: 7px 22px;
-        letter-spacing: 0.24em;
+        margin-top: 14px;
+        padding: 6px 20px;
+        letter-spacing: 0.22em;
         text-transform: uppercase;
-        font-size: 0.72rem;
+        font-size: 0.68rem;
         color: #3e2e10;
         background: linear-gradient(180deg, #ddba5c, #a6802e);
         border: 1px solid #7c5a1f;
         border-radius: 3px;
         box-shadow:
           inset 0 1px 0 rgba(255, 240, 200, 0.6),
-          0 2px 4px rgba(36, 28, 18, 0.3);
-        text-shadow: 0 1px 0 rgba(255, 240, 200, 0.35);
+          0 2px 4px rgba(15, 10, 5, 0.4);
       }
-      .portrait-note {
-        margin: 18px auto 0;
-        max-width: 44ch;
-        font-style: italic;
-      }
-      .hero-portrait .btn-row {
+      .claim-note {
         margin-top: 26px;
-        justify-content: center;
-      }
-
-      footer {
+        background: var(--paper-white);
+        font-family: "Caveat", cursive;
+        font-size: 1.3rem;
+        color: #33291b;
+        padding: 12px 20px 10px;
+        transform: rotate(-2.6deg);
+        position: relative;
         text-align: center;
-        padding: 52px 22px 64px;
-        font-family: "Special Elite", monospace;
-        font-size: 0.8rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--ink-2);
+        line-height: 1.3;
+        box-shadow: 0 8px 16px rgba(15, 10, 5, 0.35);
       }
-      footer .rule {
-        margin-bottom: 22px;
-        max-width: 200px;
-        opacity: 0.7;
+      .claim-note a {
+        color: var(--rust);
+        text-decoration: underline wavy rgba(94, 42, 30, 0.5) 1px;
+        text-underline-offset: 3px;
+      }
+      .claim-note a:focus-visible {
+        outline: 2px dashed var(--rust);
+        outline-offset: 3px;
+      }
+      .claim-note .tape {
+        top: -14px;
+        left: 50%;
+        transform: translateX(-50%) rotate(2deg);
+        width: 78px;
       }
 
-      /* ---------- confetti · paper scraps ---------- */
-      .confetti {
-        position: fixed;
-        top: -20px;
-        z-index: 50;
-        pointer-events: none;
-        width: 10px;
-        height: 14px;
-        opacity: 0.9;
-        animation: fall linear forwards;
+      /* ============ 8 · CARVED FOOTER ============ */
+      footer {
+        margin-top: 92px;
+        text-align: center;
+        padding: 26px 20px 30px;
+        background: radial-gradient(ellipse 62% 88% at 50% 50%, rgba(14, 9, 4, 0.5), rgba(14, 9, 4, 0.22) 62%, transparent 78%);
       }
-      @keyframes fall {
-        to {
-          transform: translateY(110vh) rotate(720deg);
-          opacity: 0.6;
+      .carved {
+        font-family: "Special Elite", monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        text-indent: 0.3em;
+        font-size: 0.8rem;
+        color: var(--wood-carve);
+        text-shadow:
+          0 1.5px 1px rgba(14, 9, 4, 0.9),
+          0 -1px 1px rgba(14, 9, 4, 0.7);
+        opacity: 0.92;
+      }
+      .carved + .carved {
+        margin-top: 10px;
+        font-size: 0.68rem;
+      }
+      .sharpie {
+        margin-top: 22px;
+        font-family: "Caveat", cursive;
+        font-size: 1.35rem;
+        color: #efe6d2;
+        transform: rotate(-1.6deg);
+        display: inline-block;
+        text-shadow: 0 1px 2px rgba(14, 9, 4, 0.8);
+      }
+
+      /* ============ MOBILE ============ */
+      @media (max-width: 640px) {
+        .pole {
+          margin: 0;
+          width: 100%;
+        }
+        .scrapnote {
+          margin-left: 6%;
+        }
+        .poster-wrap {
+          width: 90%;
+          margin: 30px auto 0 5%;
+        }
+        .relic-a {
+          left: -12px;
+          width: 90px;
+        }
+        .photo-row {
+          min-height: 0;
+          display: flow-root;
+        }
+        .polaroid {
+          position: relative;
+          left: 2%;
+          width: 74%;
+        }
+        .indexcard {
+          position: relative;
+          top: 0;
+          right: auto;
+          width: 88%;
+          margin: -34px 4% 0 auto;
+        }
+        .letter-wrap {
+          margin-top: 44px;
+        }
+        .letter {
+          width: 94%;
+          padding: 28px 20px 24px;
+        }
+        .refs-row {
+          min-height: 0;
+          display: flow-root;
+        }
+        .clipping {
+          position: relative;
+          left: 3%;
+          width: 80%;
+          padding-bottom: 26px;
+        }
+        .sticky {
+          position: relative;
+          right: auto;
+          width: 62%;
+          margin: -14px 4% 0 auto;
+          display: block;
+        }
+        .duecard {
+          margin-right: 4%;
+        }
+        .flyer {
+          margin-left: 3%;
+        }
+        .relic-b {
+          right: -8px;
         }
       }
 
       @media (prefers-reduced-motion: reduce) {
-        .confetti {
-          display: none;
+        .swinger {
+          animation: none;
         }
-        .btn {
+        .tab.tearing {
+          animation: none;
+          opacity: 0;
+        }
+        .btn,
+        .tab {
           transition: none;
-        }
-        .reveal {
-          animation: none;
-        }
-        .strip-inner {
-          animation: none;
-        }
-        html {
-          scroll-behavior: auto;
         }
       }
     </style>
   </head>
   <body>
-    <!-- 1 · HERO -->
-    <div class="wrap">
-      <header class="hero">
-        <div class="hero-frame">
-          <div class="corner-t" aria-hidden="true"></div>
-          <div class="corner-b" aria-hidden="true"></div>
-          <p class="eyebrow reveal">Duboce Triangle · San Francisco</p>
-          <div class="double-rule top reveal" aria-hidden="true"></div>
-          <h1 class="reveal d1">WANTED.</h1>
-          <div class="star-row hero-stars reveal d2" aria-hidden="true">
-            ★★★★★★★
-          </div>
-          <div class="double-rule bottom reveal d2" aria-hidden="true"></div>
-          <p class="hero-sub reveal d3">
-            Hello! We're Ha &amp; Chris. We're looking for 1 apartment and a
-            supercalifragilisticexpialidocious human to rent it from. If you
-            have a unit — or know someone who does — you're in for a treat.
-          </p>
-        </div>
-      </header>
-    </div>
-    <div class="ticket-edge" aria-hidden="true"></div>
+    <main class="pole">
+      <!-- weathered history: old staple scars -->
+      <span class="scar" style="top: 14px; left: 22%; transform: rotate(14deg)" aria-hidden="true"></span>
+      <span class="scar rusted" style="top: 30px; left: 61%; transform: rotate(-9deg)" aria-hidden="true"></span>
+      <span class="scar" style="top: 52px; left: 79%; transform: rotate(4deg)" aria-hidden="true"></span>
+      <span class="scar rusted" style="top: 21px; left: 41%; transform: rotate(-21deg)" aria-hidden="true"></span>
+      <span class="scar-drip" style="top: 34px; left: 62%" aria-hidden="true"></span>
+      <span class="scar" style="top: 6%; left: 8%; transform: rotate(-7deg)" aria-hidden="true"></span>
+      <span class="scar rusted" style="top: 38%; left: 88%; transform: rotate(12deg)" aria-hidden="true"></span>
+      <span class="scar-drip" style="top: 38.3%; left: 88.6%" aria-hidden="true"></span>
+      <span class="scar" style="top: 56%; left: 5%; transform: rotate(23deg)" aria-hidden="true"></span>
+      <span class="scar rusted" style="top: 72%; left: 15%; transform: rotate(-13deg)" aria-hidden="true"></span>
+      <span class="scar" style="top: 86%; left: 70%; transform: rotate(8deg)" aria-hidden="true"></span>
 
-    <div class="strip" aria-hidden="true">
-      <div class="strip-inner">
-        <span>Apartment wanted</span>★<span>Reward: excellent tenants</span
-        >★<span>Duboce Triangle</span>★<span>Inquire within</span>★<span
-          >Apartment wanted</span
-        >★<span>Reward: excellent tenants</span>★<span>Duboce Triangle</span
-        >★<span>Inquire within</span>★
-      </div>
-    </div>
+      <!-- 0 · scrap note -->
+      <p class="scrapnote art">
+        <span class="staple" aria-hidden="true"></span>
+        you scanned the poster. it worked.<br />
+        everything we promised is nailed up below. — H&amp;C
+      </p>
 
-    <!-- 2 · THE REWARD -->
-    <div class="band reward-band">
-      <span class="reward-side" aria-hidden="true"
-        >Reward offered · Reward offered · Reward offered</span
-      >
-      <div class="wrap">
-        <section aria-labelledby="reward-h">
-          <div class="sec-head">
-            <span class="stamp" aria-hidden="true">№ 1</span>
-            <h2 id="reward-h">The Reward</h2>
-            <div class="rule" aria-hidden="true"><span>❦</span></div>
-          </div>
-          <ul class="reward-list">
-            <li>
-              <strong>Rent on the 1st.</strong> Always on time, never late.
-            </li>
-            <li>
-              <strong>Tenants who brag about you.</strong> "Our landlord is
-              amazing" - at parties, unprompted, for years.
-            </li>
-            <li>
-              <strong>Your building, loved.</strong> We treat hardwood floors
-              like museum pieces and report small problems before they become
-              big ones.
-            </li>
-            <li>
-              <strong>Quiet after 10pm, friendly before it.</strong> We wave at
-              neighbors. Neighbors wave back. Ha makes a mean mochi banana
-              bread.
-            </li>
-            <li>
-              <strong>Boring paperwork, done fast.</strong> References, proof of
-              income, and a glowing letter from our current landlord, all ready
-              to send at a moment notice.
-            </li>
-          </ul>
-        </section>
-      </div>
-    </div>
-
-    <!-- 3 · THE NUMBERS -->
-    <div class="wrap">
-      <section aria-labelledby="numbers-h">
-        <div class="sec-head">
-          <span class="stamp" aria-hidden="true">№ 2</span>
-          <h2 id="numbers-h">The Numbers</h2>
-          <div class="rule" aria-hidden="true"><span>❦</span></div>
-        </div>
-        <div class="counters">
-          <div class="counter">
-            <span class="num" id="days-count">0</span>
-            <span class="lab">time spent searching<br />for you</span>
-          </div>
-          <div class="counter">
-            <span class="num">1</span>
-            <span class="lab">Favorite bench<br />right around the corner</span>
-          </div>
-          <div class="counter">
-            <span class="num">100%</span>
-            <span class="lab">On-time rent,<br />lifetime record</span>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- 4 · ABOUT US -->
-    <div class="band about">
-      <div class="wrap">
-        <section aria-labelledby="about-h">
-          <div class="sec-head">
-            <span class="stamp" aria-hidden="true">№ 3</span>
-            <h2 id="about-h">The two humans behind the poster</h2>
-            <div class="rule" aria-hidden="true"><span>❦</span></div>
-          </div>
-          <div class="about-grid">
-            <div class="keepsake-col">
-              <figure class="keepsake">
-                <div
-                  class="photo"
-                  role="img"
-                  aria-label="Ha and Chris, smiling"
-                ></div>
-                <figcaption>
-                  Ha &amp; Chris — somewhere near Duboce Park, mid-fog
-                </figcaption>
-              </figure>
-            </div>
-            <div class="about-copy">
-              <p>
-                Hello! We're Ha and Chris. Ha is an AI engineer at a climate
-                tech company; Chris runs an executive consulting S-corp. 750+
-                credit score, good rental history. We're looking for a 1–2BR in
-                or near Duboce Triangle, 12+ month lease with hard-wood floors
-                and natural light.
-              </p>
-              <p>
-                We love this neighborhood and hope to find a landlord who loves
-                it too. Chris has lived here for more than 2 years, and now that
-                Ha is moving in, we hope to stay in this neighborhood. We love
-                it all: Crossroad - national thrifting treasure. Thorough Bakery
-                with the best multigrain loaf that Ha devours in a day. The dogs
-                — so many dogs — whose names we learned before their owners' in
-                Duboce. Chris walks the park every single day in his straw hat,
-                like the golden retriever he is, and comes home with new
-                friends.
-              </p>
-
-              <ul class="cred-list">
-                <li>Credit in the high 770s</li>
-                <li>
-                  Clean rental history — paid in full and on time, reference
-                  letters on hand
-                </li>
-                <li>Non-smokers, quiet, no complaints on record</li>
-              </ul>
-              <p>
-                We're tenants who read the lease, pay early, and stay. We would
-                love to put down roots here.
-              </p>
-              <p class="ready-line">
-                References, proof of income, and our landlord letter: ready to
-                send today.
-              </p>
-              <div class="btn-row">
-                <a
-                  class="btn primary"
-                  href="mailto:phuonghatrannguyen00@gmail.com?subject=I%20have%20an%20apartment%20for%20you"
-                  >I have a unit — let's talk</a
-                >
-                <a
-                  class="btn"
-                  href="mailto:phuonghatrannguyen00@gmail.com?subject=Apartment%20lead%20for%20Ha%20%26%20Chris"
-                  >I know a place</a
-                >
-              </div>
-              <p class="mail-fallback">
-                or text:
-                <a class="text-link" href="sms:+16282929760"
-                  >+1 (628) 292-9760</a
-                >
-              </p>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
-
-    <!-- 5 · CHARACTER REFERENCES -->
-    <div class="wrap">
-      <section aria-labelledby="refs-h">
-        <div class="sec-head">
-          <span class="stamp" aria-hidden="true">№ 4</span>
-          <h2 id="refs-h">Character References</h2>
-          <div class="rule" aria-hidden="true"><span>❦</span></div>
-        </div>
-        <div class="testi-stack">
-          <div class="testi">
-            <div class="stars" aria-hidden="true">★★★★★</div>
-            "Girl that mochi banana bread was really fucking good."
-            <span class="who">— A friend, unpaid, unprompted</span>
-          </div>
-          <div class="testi">
-            <div class="stars" aria-hidden="true">★★★★★</div>
-            "Chris makes friends with strangers in the park. He just walks
-            around with a straw hat and talks to people and their dogs. That's
-            how we met."
-            <span class="who">— Joanne (and Honey 🐕), Duboce Park</span>
-          </div>
-          <div class="testi">
-            <div class="stars" aria-hidden="true">★★★★★</div>
-            "Chris brought us mangoes when I was pregnant. And a baby shower
-            gift. We still talk to him and Ha after we moved."
-            <span class="who">-- A previous neighbor in Duboce Triangle</span>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- 6 · SIGHTING -->
-    <div class="wrap">
-      <section aria-labelledby="sighting-h">
-        <div class="sighting-box">
-          <div class="sec-head">
-            <span class="stamp" aria-hidden="true">№ 5</span>
-            <h2 id="sighting-h">Know someone with a place?</h2>
-            <p>
-              Not a landlord? Do you know if a neighbor moving out? A friend
-              whose building has "that one empty unit"? Send it our way and earn
-              our eternal gratitude — plus baked goods, negotiable.
+      <!-- 1 · the wanted poster -->
+      <section class="zone" aria-label="The wanted poster">
+        <div class="poster-wrap">
+          <div class="relic relic-a" aria-hidden="true">lost cat<br />answers to “rent”<br />(2019)</div>
+          <div class="tilt">
+          <article class="poster art">
+            <span class="staple p-tl" aria-hidden="true"></span>
+            <span class="staple p-tr" aria-hidden="true"></span>
+            <span class="staple p-bl" aria-hidden="true"></span>
+            <h1>WANTED.</h1>
+            <p class="subline">Haunted or alive</p>
+            <p class="stars" aria-label="four star tenants">★★★★</p>
+            <div class="mug" role="img" aria-label="Ha and Chris, smiling, printed in newsprint gray"></div>
+            <p class="mug-cap">the suspects: Ha &amp; Chris</p>
+            <p class="reward">
+              $4,000–6,000<small>/ month · reward</small>
             </p>
-            <div class="btn-row">
-              <a
-                class="btn primary"
-                href="mailto:phuonghatrannguyen00@gmail.com?subject=Apartment%20lead%20for%20Ha%20%26%20Chris"
-                >Send us a lead</a
-              >
-            </div>
-            <p class="mail-fallback">
-                or text:
-                <a class="text-link" href="sms:+16282929760"
-                  >+1 (628) 292-9760</a
-                >
-              </p>
+            <p class="want">
+              For any landlord who can produce one (1) 1–2&nbsp;bedroom
+              apartment near Duboce&nbsp;Triangle.
+            </p>
+            <p class="fine">12+ month lease · hardwood floors · natural light</p>
+            <span class="rip-hint" aria-hidden="true">↓ take a number, seriously ↓</span>
+          </article>
+          <div class="tabs" role="group" aria-label="Tear-off phone number tabs — activating one copies our number">
+            <span class="tab stub" aria-hidden="true"></span>
+            <button class="tab" type="button" aria-label="Tear off a tab and copy our phone number">628&#8209;292&#8209;9760 ✂</button>
+            <button class="tab" type="button" aria-label="Tear off a tab and copy our phone number">628&#8209;292&#8209;9760 ✂</button>
+            <span class="tab stub" aria-hidden="true"></span>
+            <button class="tab" type="button" aria-label="Tear off a tab and copy our phone number">628&#8209;292&#8209;9760 ✂</button>
+            <button class="tab" type="button" aria-label="Tear off a tab and copy our phone number">628&#8209;292&#8209;9760 ✂</button>
+            <button class="tab" type="button" aria-label="Tear off a tab and copy our phone number">628&#8209;292&#8209;9760 ✂</button>
+            <button class="tab" type="button" aria-label="Tear off a tab and copy our phone number">628&#8209;292&#8209;9760 ✂</button>
           </div>
+          </div>
+          <p class="tab-toast" role="status" aria-live="polite"></p>
         </div>
       </section>
-    </div>
 
-    <!-- 7 · BE OUR HERO -->
-    <div class="wrap">
-      <section aria-labelledby="hero-portrait-h" class="hero-portrait">
-        <div class="sec-head">
-          <span class="stamp" aria-hidden="true">№ 6</span>
-          <h2 id="hero-portrait-h">Be Our Hero</h2>
-        </div>
-        <div class="gilt-frame">
-          <div class="gilt-lip">
-            <div class="portrait">
-              <span class="portrait-q" aria-hidden="true">?</span>
-              <p class="portrait-caption">This could be you.</p>
+      <!-- 2 · polaroid + joanne's index card -->
+      <section class="photo-row" aria-label="Photo and a neighbor's note">
+        <figure class="polaroid art">
+          <span class="tape" aria-hidden="true"></span>
+          <div class="shot" role="img" aria-label="Ha and Chris near Duboce Park"></div>
+          <figcaption>us!! near the dog side of duboce park, mid-fog</figcaption>
+        </figure>
+        <figure class="indexcard art">
+          <span class="tack" aria-hidden="true"></span>
+          <blockquote>
+            “Chris makes friends with strangers in the park. He just walks
+            around with a straw hat and talks to people and their dogs.
+            That’s how we met.”
+          </blockquote>
+          <cite>— Joanne (and Honey 🐕), Duboce Park</cite>
+        </figure>
+      </section>
+
+      <!-- 3 · typed letter -->
+      <section class="letter-wrap" aria-label="A letter to our future landlord">
+        <div class="relic relic-b" aria-hidden="true">garage sale<br />sat 9am · gone by 11</div>
+        <article class="letter art">
+          <span class="tack lt" aria-hidden="true"></span>
+          <span class="tack rt" aria-hidden="true"></span>
+          <h2>Dear future landlord,</h2>
+          <p>
+            We’re Ha &amp; Chris. Ha is an AI engineer at a climate tech
+            company; Chris runs an executive consulting S-corp. We’re after a
+            1–2BR in or near Duboce Triangle — 12+ month lease, hardwood
+            floors, natural light.
+          </p>
+          <p>
+            Chris has lived here more than two years, and now that Ha is
+            moving in, we intend to stay. We love it all: Crossroads, a
+            national thrifting treasure. Thorough Bakery, whose multigrain
+            loaf Ha devours in a day. The dogs — so many dogs — whose names we
+            learned before their owners’. Chris walks the park every single
+            day in his straw hat, like the golden retriever he is, and comes
+            home with new friends.
+          </p>
+          <ul>
+            <li>credit in the high 770s</li>
+            <li>clean rental history — paid in full, on time, letters on hand</li>
+            <li>non-smokers, quiet after 10pm, friendly before it</li>
+          </ul>
+          <p>
+            We’re tenants who read the lease, pay early, and stay. We treat
+            hardwood floors like museum pieces and report small problems
+            before they become big ones.
+          </p>
+          <p class="ready">
+            References, proof of income, and our landlord letter: ready to
+            send today.
+          </p>
+          <p><span class="sig">— Ha &amp; Chris</span></p>
+        </article>
+      </section>
+
+      <!-- 4 · clipping + sticky -->
+      <section class="refs-row" aria-label="Character references">
+        <h2 class="sr-only">Character references</h2>
+        <figure class="clipping art">
+          <span class="tape" aria-hidden="true"></span>
+          <div class="kicker"><span>The Duboce Gazette</span><span>p. 7</span></div>
+          <h3>Neighborly conduct reported on Sanchez St.</h3>
+          <blockquote>
+            “Chris brought us mangoes when I was pregnant. And a baby shower
+            gift. We still talk to him and Ha after we moved.”
+          </blockquote>
+          <cite>— a previous neighbor, Duboce Triangle</cite>
+        </figure>
+        <figure class="sticky">
+          <blockquote>
+            “Girl that mochi banana bread was really f★cking good.”
+          </blockquote>
+          <cite>— a friend, unpaid, unprompted</cite>
+        </figure>
+      </section>
+
+      <!-- 5 · library due-date card -->
+      <section class="duecard-wrap" aria-label="The numbers">
+        <article class="duecard art">
+          <span class="staple d1" aria-hidden="true"></span>
+          <h2>Tenant record · do not remove</h2>
+          <table>
+            <tbody>
+              <tr>
+                <td class="stamp"><span class="stamp-ink" id="today-stamp">JUL 12</span></td>
+                <td><span class="big" id="days-count">27</span>days spent searching for you</td>
+              </tr>
+              <tr>
+                <td class="stamp"><span class="stamp-ink">JUN 15</span></td>
+                <td><span class="big">1</span>favorite bench, right around the corner</td>
+              </tr>
+              <tr>
+                <td class="stamp"><span class="stamp-ink">ALWAYS</span></td>
+                <td><span class="big">100%</span>on-time rent, lifetime record</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="pocket-note">return to: any 1–2BR, Duboce Triangle</p>
+        </article>
+      </section>
+
+      <!-- 6 · contact flyer -->
+      <section class="flyer-wrap" aria-label="Contact us">
+        <article class="flyer art">
+          <span class="staple f1" aria-hidden="true"></span>
+          <span class="staple f2" aria-hidden="true"></span>
+          <span class="staple f3" aria-hidden="true"></span>
+          <span class="staple f4" aria-hidden="true"></span>
+          <h2>KNOW SOMEONE WITH A PLACE?</h2>
+          <p>
+            A neighbor moving out? A friend whose building has “that one
+            empty unit”? Send it our way and earn our eternal gratitude —
+            plus baked goods, negotiable.
+          </p>
+          <div class="btn-row">
+            <a class="btn primary" href="mailto:phuonghatrannguyen00@gmail.com?subject=I%20have%20an%20apartment%20for%20you">I have a unit — let’s talk</a>
+            <a class="btn" href="mailto:phuonghatrannguyen00@gmail.com?subject=Apartment%20lead%20for%20Ha%20%26%20Chris">I know a place</a>
+          </div>
+          <p class="or-text">
+            or text: <a href="sms:+16282929760">+1 (628) 292-9760</a>
+          </p>
+        </article>
+      </section>
+
+      <!-- 7 · hanging gilt frame -->
+      <section class="hang" aria-label="Be our hero">
+        <h2 class="sr-only">Be our hero</h2>
+        <span class="nail" aria-hidden="true"></span>
+        <div class="swinger">
+          <div class="strings" aria-hidden="true"></div>
+          <div class="gilt art">
+            <div class="gilt-lip">
+              <div class="portrait">
+                <span class="q" aria-hidden="true">?</span>
+                <p class="cap">This could be you.</p>
+              </div>
             </div>
           </div>
+          <span class="nameplate">Our Hero · Est. 2026</span>
         </div>
-        <div><span class="nameplate">Our Hero · Est. 2026</span></div>
-        <p class="portrait-note">
-          One landlord's portrait will hang here forever. We will polish the
-          frame.
+        <p class="claim-note art">
+          <span class="tape" aria-hidden="true"></span>
+          one landlord’s portrait will hang here forever.<br />
+          we will polish the frame.
+          <a href="mailto:phuonghatrannguyen00@gmail.com?subject=I%20have%20an%20apartment%20for%20you">claim it →</a>
         </p>
-        <div class="btn-row">
-          <a
-            class="btn primary"
-            href="mailto:phuonghatrannguyen00@gmail.com?subject=I%20have%20an%20apartment%20for%20you"
-            >Claim the frame</a
-          >
-        </div>
-        <p class="mail-fallback">
-                or text:
-                <a class="text-link" href="sms:+16282929760"
-                  >+1 (628) 292-9760</a
-                >
-              </p>
       </section>
-    </div>
 
-    <footer>
-      <div class="rule" aria-hidden="true"><span>✦</span></div>
-      Duboce Triangle · San Francisco · 2026<br />
-      Made with hope &amp; Fable
-    </footer>
+      <!-- 8 · carved into the pole -->
+      <footer>
+        <p class="carved">Duboce Triangle · San Francisco</p>
+        <p class="carved">est. on this pole · 2026</p>
+        <p class="sharpie">made with hope &amp; fable</p>
+      </footer>
+    </main>
 
     <script>
-      // Live days-searching counter — set your actual search start date here:
       const SEARCH_START = new Date("2026-06-15");
-      const days = Math.max(
-        1,
-        Math.floor((Date.now() - SEARCH_START) / 86400000)
-      );
+      const days = Math.max(1, Math.floor((Date.now() - SEARCH_START) / 86400000));
       document.getElementById("days-count").textContent = days;
 
-      document.querySelectorAll(".copy-email").forEach((btn) => {
-        btn.addEventListener("click", async () => {
-          const email = btn.textContent.trim();
-          try {
-            await navigator.clipboard.writeText(email);
-          } catch {
-            const ta = document.createElement("textarea");
-            ta.value = email;
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand("copy");
-            ta.remove();
+      const MONTHS = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+      const now = new Date();
+      document.getElementById("today-stamp").textContent =
+        MONTHS[now.getMonth()] + " " + now.getDate();
+
+      const PHONE = "+16282929760";
+      const toast = document.querySelector(".tab-toast");
+      let toastTimer;
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+      function copyPhone() {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(PHONE).catch(fallbackCopy);
+        }
+        return Promise.resolve(fallbackCopy());
+      }
+      function fallbackCopy() {
+        const ta = document.createElement("textarea");
+        ta.value = PHONE;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+      }
+      function makeStub(tab) {
+        const stub = document.createElement("span");
+        stub.className = "tab stub";
+        stub.setAttribute("aria-hidden", "true");
+        tab.replaceWith(stub);
+      }
+
+      document.querySelectorAll("button.tab").forEach((tab) => {
+        tab.addEventListener("click", () => {
+          copyPhone();
+          clearTimeout(toastTimer);
+          toast.textContent = "+1 (628) 292-9760 copied — text us!";
+          toast.classList.add("show");
+          toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+          if (reducedMotion.matches) {
+            makeStub(tab);
+          } else {
+            tab.classList.add("tearing");
+            tab.addEventListener("animationend", () => makeStub(tab), { once: true });
           }
-          const original = btn.textContent;
-          btn.textContent = "copied — thank you kindly ✓";
-          setTimeout(() => (btn.textContent = original), 2000);
         });
       });
-      document.getElementById("dogs-count").textContent = Math.floor(
-        days * 2.5
-      );
-
-      // Confetti burst on load (respects reduced motion)
-      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        const colors = [
-          "#F4EACC",
-          "#E7D7AE",
-          "#C8AF7E",
-          "#8A6B44",
-          "#5E2A1E",
-          "#241C12"
-        ];
-        for (let i = 0; i < 70; i++) {
-          const c = document.createElement("div");
-          c.className = "confetti";
-          c.style.left = Math.random() * 100 + "vw";
-          c.style.background =
-            colors[Math.floor(Math.random() * colors.length)];
-          c.style.animationDuration = 2.5 + Math.random() * 2.5 + "s";
-          c.style.animationDelay = Math.random() * 1.2 + "s";
-          c.style.transform = "rotate(" + Math.random() * 360 + "deg)";
-          if (Math.random() > 0.5) c.style.borderRadius = "50%";
-          document.body.appendChild(c);
-          setTimeout(() => c.remove(), 6500);
-        }
-      }
     </script>
   </body>
 </html>
